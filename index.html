@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vue3 手写响应式</title>
+  </head>
+  <script src="./vue3.js"></script>
+  <body>
+    <div id="app"></div>
+    <div id="btn"></div>
+    <script>
+      const app = document.getElementById("app");
+      const btn = document.getElementById("btn");
+      const obj = {
+        name: "ds",
+        age: 1,
+      };
+      // 将对象变为响应式对象
+      const reactiveObj = reactive(obj);
+      // 计算属性
+      const double = computed(() => reactiveObj.age * 2);
+      // 副作用
+      effect(() => {
+        app.innerHTML = `<p>${reactiveObj.name}-----</p>${reactiveObj.age}----${double}</p>`;
+      });
+      btn.addEventListener(
+        "click",
+        () => {
+          reactiveObj.age++;
+        },
+        false
+      );
+    </script>
+  </body>
+</html>
